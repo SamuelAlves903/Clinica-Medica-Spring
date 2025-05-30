@@ -1,4 +1,8 @@
 package clinica.agendamento.trabalho.repository;
 
-public class MedicoRepository {
+import clinica.agendamento.trabalho.model.Medico;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface MedicoRepository extends JpaRepository <Medico, Long> {
+
 }
