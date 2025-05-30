@@ -22,14 +22,24 @@ public class MedicoController {
         return "medico/formulario";
     }
 
-    @PostMapping("savar")
+    @PostMapping("salvar")
     public String salvar(Medico medico, Model model) {
+
+        if (medico.getCrm() == null || medico.getCrm().trim().isEmpty()) {
+            model.addAttribute("erro", "O campo CRM é obrigatório.");
+            return iniciar(medico, model);
+        }
+
+        if (medico.getEspecialidade() == null || medico.getEspecialidade().trim().isEmpty()) {
+            model.addAttribute("erro", "O campo Especialidade é obrigatório.");
+            return iniciar(medico, model);
+        }
 
         try {
             service.salvar(medico);
             return "redirect:/medico/listar";
         } catch (Exception e) {
-            model.addAttribute("Ocorreu um erro inesperado" + e.getMessage());
+            model.addAttribute("erro", "Ocorreu um erro inesperado: " + e.getMessage());
             return iniciar(medico, model);
         }
     }
