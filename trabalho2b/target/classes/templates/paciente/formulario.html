@@ -8,9 +8,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
 </head>
+
 <body>
 <div th:insert="~{index :: header}"></div>
 <div class="container">
+
+    <div th:if="${erro}" class="alert alert-danger" role="alert">
+        <p th:text="${erro}"></p>
+    </div>
+
     <form>
         <div class="mb-3">
             <input hidden="true" name="id" th:value="${paciente.id}" type="text">
@@ -22,7 +28,7 @@
             <input class="form-control" id="cpf" name="cpf" th:value="${paciente.cpf}" type="text">
 
             <label class="form-label" for="dataNascimento">Data Nascimento</label>
-            <input class="form-control" id="dataNascimento" name="dataNascimento" th:value="${paciente.data_nascimento}" type="date">
+            <input class="form-control" id="dataNascimento" name="dataNascimento" th:value="${paciente.dataNascimento}" type="date">
 
             <label class="form-label" for="telefone">Telefone</label>
             <input class="form-control" id="telefone" name="telefone" th:value="${paciente.telefone}" type="text">
@@ -35,5 +41,34 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    const cpfInput = document.getElementById('cpf');
+    cpfInput.addEventListener('input', function (e) {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length > 11) value = value.slice(0, 11);
+        value = value.replace(/(\d{3})(\d)/, '$1.$2');
+        value = value.replace(/(\d{3})(\d)/, '$1.$2');
+        value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+        e.target.value = value;
+    });
+
+    const telefoneInput = document.getElementById('telefone');
+    telefoneInput.addEventListener('input', function (e) {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length > 11) value = value.slice(0, 11);
+
+        if (value.length <= 10) {
+            value = value.replace(/(\d{2})(\d)/, '($1) $2');
+            value = value.replace(/(\d{4})(\d)/, '$1-$2');
+        } else {
+            value = value.replace(/(\d{2})(\d)/, '($1) $2');
+            value = value.replace(/(\d{5})(\d)/, '$1-$2');
+        }
+
+        e.target.value = value;
+    });
+</script>
+
 </body>
 </html>
