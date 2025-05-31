@@ -12,22 +12,20 @@
 <header th:fragment="header">
     <nav class="navbar navbar-expand bg-primary navbar-dark shadow-sm">
         <div class="container-fluid">
-            <!-- Logo à esquerda com margem -->
             <a class="navbar-brand me-5" th:href="@{/}">
                 Clínica Médica Spring
             </a>
 
-            <!-- Itens alinhados à direita -->
             <div class="d-flex ms-auto">
                 <ul class="navbar-nav gap-4">
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/pacientes}">Pacientes</a>
+                        <a class="nav-link" th:href="@{/}">Pacientes</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/medicos}">Médicos</a>
+                        <a class="nav-link" th:href="@{/}">Médicos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/agendamentos}">Agenda</a>
+                        <a class="nav-link" th:href="@{/}">Agenda</a>
                     </li>
                 </ul>
             </div>
