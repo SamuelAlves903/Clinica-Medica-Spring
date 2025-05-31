@@ -19,12 +19,17 @@
             <input class="form-control" id="crm" name="crm" th:value="${medico.crm}" type="text">
 
             <label class="form-label" for="especialidade">Especialidade</label>
-            <select class="form-control" id="especialidade" name="especialidade" th:value="${medico.especialidade}">
-                <option value="1">Clínica Médica</option>
-                <option value="2">Pediatria</option>
-                <option value="3">Cirurgia Geral</option>
-                <option value="4">Traumatologia</option>
-                <option value="5">Cardiologia</option>
+            <select class="form-control" id="especialidade" name="especialidade">
+                <option value="Clínica Médica"
+                        th:selected="${medico.especialidade} == 'Clínica Médica'">Clínica Médica</option>
+                <option value="Pediatria"
+                        th:selected="${medico.especialidade} == 'Pediatria'">Pediatria</option>
+                <option value="Cirurgia Geral"
+                        th:selected="${medico.especialidade} == 'Cirurgia Geral'">Cirurgia Geral</option>
+                <option value="Traumatologia"
+                        th:selected="${medico.especialidade} == 'Traumatologia'">Traumatologia</option>
+                <option value="Cardiologia"
+                        th:selected="${medico.especialidade} == 'Cardiologia'">Cardiologia</option>
             </select>
 
             <br>
