@@ -28,6 +28,8 @@ public class AgendaController {
 
     @GetMapping
     public String iniciar(Agenda agenda, Model model) {
+        model.addAttribute("pacientes", pacienteService.listarTodos());
+        model.addAttribute("medicos", medicoService.listarTodos());
         return "agenda/formulario";
     }
 
@@ -72,8 +74,11 @@ public class AgendaController {
     @GetMapping("editar/{id}")
     public String alterar(@PathVariable Long id, Model model){
         model.addAttribute("agenda", agendaService.buscarPorId(id));
+        model.addAttribute("pacientes", pacienteService.listarTodos());
+        model.addAttribute("medicos", medicoService.listarTodos());
         return "agenda/formulario";
     }
+
 
     @GetMapping("remover/{id}")
     public String remover(@PathVariable Long id, Model model) {
