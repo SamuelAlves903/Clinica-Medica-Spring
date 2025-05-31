@@ -20,7 +20,7 @@ public class Paciente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
-    private Long cpf;
+    private String cpf;
     private Date data_nascimento;
-    private Long telefone;
+    private String telefone;
 }
