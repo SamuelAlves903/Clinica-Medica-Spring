@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Clinica Medica Spring</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+</head>
+<body>
+<div th:insert="~{index :: header}"></div>
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Data de Nascimento</th>
+            <th>Telefone</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="paciente : ${pacientes}">
+            <td th:text="${paciente.id}">0</td>
+            <td th:text="${paciente.nome}">0</td>
+            <td th:text="${paciente.cpf}">0</td>
+            <td th:text="${paciente.data_nascimento}">0</td>
+            <td th:text="${paciente.telefone}">0</td>
+            <td>
+                <a th:href="@{'/paciente/editar/' + ${paciente.id}}" type="button" class="btn btn-outline-dark"
+                   title="Editar">
+                    <i class="bi bi-pencil-square"></i>
+                </a>
+                <a th:href="@{'/paciente/remover/' + ${paciente.id}}" type="button" class="btn btn-outline-dark"
+                   title="Remover">
+                    <i class="bi bi-dash-square"></i>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

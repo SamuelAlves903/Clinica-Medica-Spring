@@ -19,8 +19,12 @@ public class Paciente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nome;
+
     private String cpf;
+
     private Date data_nascimento;
+
     private String telefone;
 }

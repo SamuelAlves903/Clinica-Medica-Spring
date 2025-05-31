@@ -18,8 +18,14 @@
 
             <div class="d-flex ms-auto">
                 <ul class="navbar-nav gap-4">
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/}">Pacientes</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Pacientes
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" th:href="@{/paciente}">Cadastrar Paciente</a></li>
+                            <li><a class="dropdown-item" th:href="@{/paciente/listar}">Lista Pacientes</a></li>
+                        </ul>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -27,11 +33,14 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" th:href="@{/medico}">Cadastrar Médico</a></li>
-                            <li><a class="dropdown-item" th:href="@{/medico/listar}">Listar Médicos</a></li>
+                            <li><a class="dropdown-item" th:href="@{/medico/listar}">Lista Médicos</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/}">Agenda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/banco}">Banco</a>
                     </li>
                 </ul>
             </div>
