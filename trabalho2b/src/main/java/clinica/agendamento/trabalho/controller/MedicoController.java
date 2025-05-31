@@ -46,19 +46,19 @@ public class MedicoController {
 
     @GetMapping("listar")
     public String listar(Model model) {
-        model.addAttribute("medico", service.listarTodos());
+        model.addAttribute("medicos", service.listarTodos());
         return "medico/lista";
     }
 
     @GetMapping("editar/{id}")
     public String alterar(@PathVariable Long id, Model model){
         model.addAttribute("medico", service.buscarPorId(id));
-        return "compra/formulario";
+        return "medico/formulario";
     }
 
     @GetMapping("remover/{id}")
     public String remover(@PathVariable Long id, Model model) {
         service.deletarPorId(id);
-        return "redirect:/compra/listar";
+        return "redirect:/medico/listar";
     }
 }

@@ -1,3 +1,29 @@
-.nav {
+.dropdown-hover {
+            position: relative;
+        }
 
-}
+        .dropdown-hover .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            min-width: 180px;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.15);
+            z-index: 1000;
+        }
+
+        .dropdown-hover:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-hover .dropdown-menu a {
+            display: block;
+            padding: 10px 15px;
+            color: #212529;
+            text-decoration: none;
+        }
+
+        .dropdown-hover .dropdown-menu a:hover {
+            background-color: #f1f1f1;
+        }
