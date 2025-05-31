@@ -11,6 +11,11 @@
 <body>
 <div th:insert="~{index :: header}"></div>
 <div class="container">
+
+    <div th:if="${erro}" class="alert alert-danger" role="alert">
+        <p th:text="${erro}"></p>
+    </div>
+
     <form>
         <div class="mb-3">
             <input hidden="true" name="id" th:value="${medico.id}" type="text">

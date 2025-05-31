@@ -25,8 +25,29 @@ public class MedicoController {
     @PostMapping("salvar")
     public String salvar(Medico medico, Model model) {
 
+        if (medico.getNome() == null || medico.getNome().trim().isEmpty()) {
+            model.addAttribute("erro", "O campo Nome é obrigatório.");
+            return iniciar(medico, model);
+        }
+        if (!medico.getNome().matches("^[A-Za-zÀ-ÖØ-öø-ÿ ]+$")) {
+            model.addAttribute("erro", "O campo Nome deve conter apenas letras.");
+            return iniciar(medico, model);
+        }
+        if (medico.getNome().length() > 150) {
+            model.addAttribute("erro", "O campo Nome deve ter no máximo 150 caracteres.");
+            return iniciar(medico, model);
+        }
+
         if (medico.getCrm() == null || medico.getCrm().trim().isEmpty()) {
             model.addAttribute("erro", "O campo CRM é obrigatório.");
+            return iniciar(medico, model);
+        }
+        if (!medico.getCrm().matches("\\d+")) {
+            model.addAttribute("erro", "O campo CRM deve conter apenas números.");
+            return iniciar(medico, model);
+        }
+        if (medico.getCrm().length() > 7) {
+            model.addAttribute("erro", "O campo CRM deve ter no máximo 7 dígitos.");
             return iniciar(medico, model);
         }
 
