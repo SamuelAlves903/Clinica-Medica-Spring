@@ -11,7 +11,7 @@
 <div th:insert="~{index :: header}"></div>
 <div class="container">
     <h2 class="mt-4 mb-4" th:text="${agenda.id} != null ? 'Editar Agendamento' : 'Cadastrar Agendamento'">Agendamento</h2>
-    <form>
+    <form method="post">
         <div class="mb-3">
             <input hidden="true" name="id" th:value="${agenda.id}" type="text">
 

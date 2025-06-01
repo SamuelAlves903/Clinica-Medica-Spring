@@ -26,7 +26,7 @@
             <td th:text="${paciente.id}">0</td>
             <td th:text="${paciente.nome}">0</td>
             <td th:text="${paciente.cpf}">0</td>
-            <td th:text="${paciente.data_nascimento}">0</td>
+            <td th:text="${#temporals.format(paciente.dataNascimento, 'dd-MM-yyyy')}">0</td>
             <td th:text="${paciente.telefone}">0</td>
             <td>
                 <a th:href="@{'/paciente/editar/' + ${paciente.id}}" type="button" class="btn btn-outline-dark"

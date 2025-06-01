@@ -34,40 +34,51 @@ public class AgendaController {
     }
 
     @PostMapping("salvar")
-    public String salvar(Agenda agenda, Model model) {
-
-        if (agenda.getPaciente() == null || agenda.getPaciente().toString().trim().isEmpty()) {
-            model.addAttribute("erro", "O campo Paciente é obrigatório.");
-            return iniciar(agenda, model);
-        }
-
-        if (agenda.getMedico() == null || agenda.getMedico().toString().isEmpty()) {
-            model.addAttribute("erro", "O campo Medico é obrigatório.");
-            return iniciar(agenda, model);
-        }
-
-        if (agenda.getData() == null || agenda.getData().toString().isEmpty()) {
-            model.addAttribute("erro", "O campo Data é obrigatório.");
-            return iniciar(agenda, model);
-        }
-
-        if (agenda.getHorario() == null || agenda.getHorario().toString().isEmpty()) {
-            model.addAttribute("erro", "O campo Horario é obrigatório.");
-            return iniciar(agenda, model);
-        }
-
+    public String salvar(Long id, Long pacienteId, Long medicoId,
+            java.sql.Date data, String horario, Model model) {
         try {
+            if (pacienteId == null || medicoId == null || data == null || horario == null) {
+                model.addAttribute("erro", "Todos os campos são obrigatórios.");
+                model.addAttribute("pacientes", pacienteService.listarTodos());
+                model.addAttribute("medicos", medicoService.listarTodos());
+                return "agenda/formulario";
+            }
+
+            java.sql.Time horarioSql = null;
+            try {
+                if (horario.split(":").length == 2) {
+                    horario = horario + ":00";
+                }
+                horarioSql = java.sql.Time.valueOf(horario);
+            } catch (Exception e) {
+                model.addAttribute("erro", "Formato de horário inválido: " + horario);
+                model.addAttribute("pacientes", pacienteService.listarTodos());
+                model.addAttribute("medicos", medicoService.listarTodos());
+                return "agenda/formulario";
+            }
+
+            Agenda agenda = (id != null) ? agendaService.buscarPorId(id) : new Agenda();
+
+            agenda.setPaciente(pacienteService.buscarPorId(pacienteId));
+            agenda.setMedico(medicoService.buscarPorId(medicoId));
+            agenda.setData(data);
+            agenda.setHorario(horarioSql);
+
             agendaService.salvar(agenda);
+
             return "redirect:/agenda/listar";
         } catch (Exception e) {
             model.addAttribute("erro", "Ocorreu um erro inesperado: " + e.getMessage());
-            return iniciar(agenda, model);
+            model.addAttribute("pacientes", pacienteService.listarTodos());
+            model.addAttribute("medicos", medicoService.listarTodos());
+            return "agenda/formulario";
         }
     }
 
+
     @GetMapping("listar")
     public String listar(Model model) {
-        model.addAttribute("agenda", agendaService.listarTodos());
+        model.addAttribute("agendas", agendaService.listarTodos());
         return "agenda/lista";
     }
 
