@@ -1,45 +1,46 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Clinica Medica Spring</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-
 </head>
-<body>
+<body class="bg-light-subtle">
 <div th:insert="~{index :: header}"></div>
-    <div class="container">
-        <table class="table table-hover">
-            <thead>
+
+<div class="d-flex justify-content-center">
+    <div class="p-2 mt-2 w-75 p-3">
+        <table class="table table-borderless">
+            <thead class="table-dark">
             <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>CRM</th>
-                <th>Especialidade</th>
+                <th scope="col">ID</th>
+                <th scope="col">Nome</th>
+                <th scope="col">CRM</th>
+                <th scope="col">Especialidade</th>
+                <th scope="col">Ferramentas</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="medico : ${medicos}">
                 <td th:text="${medico.id}">0</td>
-                <td th:text="${medico.nome}">0</td>
-                <td th:text="${medico.crm}">0</td>
-                <td th:text="${medico.especialidade}">0</td>
-                <td>
-                    <a th:href="@{'/medico/editar/' + ${medico.id}}" type="button" class="btn btn-outline-dark"
-                       title="Editar">
-                        <i class="bi bi-pencil-square"></i>
+                <td th:text="${medico.nome}">Nome</td>
+                <td th:text="${medico.crm}">CRM</td>
+                <td th:text="${medico.especialidade}">Especialidade</td>
+                <td class="d-flex">
+                    <a th:href="@{'/medico/editar/' + ${medico.id}}" type="button" class="btn btn-outline-dark w-50 p-1" title="Editar">
+                        Editar <i class="bi bi-pencil-square"></i>
                     </a>
-                    <a th:href="@{'/medico/remover/' + ${medico.id}}" type="button" class="btn btn-outline-dark"
-                       title="Remover">
-                        <i class="bi bi-dash-square"></i>
+                    <a th:href="@{'/medico/remover/' + ${medico.id}}" type="button" class="btn btn-outline-dark w-50 p-1" title="Remover">
+                        Remover <i class="bi bi-dash-square"></i>
                     </a>
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
