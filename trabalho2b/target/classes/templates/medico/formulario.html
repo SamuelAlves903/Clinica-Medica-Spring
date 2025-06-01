@@ -44,7 +44,8 @@
                     <label for="especialidade">Especialidade</label>
                 </div>
 
-                <div class="text-center">
+                <div class="d-flex justify-content-center gap-2 mt-4">
+                    <a class="btn btn-outline-primary w-25" th:href="@{/medico/listar}">Cancelar</a>
                     <button class="btn btn-outline-secondary w-25 p-1" formmethod="post" th:formaction="@{/medico/salvar}" type="submit">Salvar</button>
                 </div>
             </div>

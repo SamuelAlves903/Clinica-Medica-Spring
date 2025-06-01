@@ -1,6 +1,8 @@
 package clinica.agendamento.trabalho;
 
+import clinica.agendamento.trabalho.model.Medico;
 import clinica.agendamento.trabalho.model.Paciente;
+import clinica.agendamento.trabalho.service.MedicoService;
 import clinica.agendamento.trabalho.service.PacienteService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -18,18 +20,28 @@ public class TrabalhoApplication {
 	}
 
 	@Bean
-	public CommandLineRunner commandLineRunner(PacienteService pacienteService) {
+	public CommandLineRunner commandLineRunner(PacienteService pacienteService, MedicoService medicoService) {
 		return args -> {
-			var paciente = new Paciente(
-					null,
-					"Wellington",
-					"10345673456",
-					LocalDate.of(2004, 6, 15),
-					"4498765467"
-			);
+			if (pacienteService.listarTodos().isEmpty()) {
+				var paciente = new Paciente(
+						null,
+						"Wellington",
+						"10345673456",
+						LocalDate.of(2004, 6, 15),
+						"4498765467"
+				);
+				pacienteService.salvar(paciente);
+			}
 
-			pacienteService.salvar(paciente);
+			if (medicoService.listarTodos().isEmpty()) {
+				var medico = new Medico(
+						null,
+						"Samuel",
+						"4567896",
+						"Pediatria"
+				);
+				medicoService.salvar(medico);
+			}
 		};
 	}
-
 }
