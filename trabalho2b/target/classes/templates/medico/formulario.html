@@ -12,11 +12,15 @@
 <div th:insert="~{index :: header}"></div>
 <div class="d-flex justify-content-center">
 
-    <div th:if="${erro}" class="alert alert-danger mt-3 w-50" role="alert">
-        <p th:text="${erro}"></p>
-    </div>
 
     <div class="border border-dark-subtle p-3 mt-5 w-50 p-3 rounded">
+
+        <div th:if="${erro}" class="d-flex justify-content-center align-items-center mt-3">
+            <div class="alert alert-danger text-center p-3" style="min-width: 300px; max-width: 600px;">
+                <p class="mb-0" th:text="${erro}"></p>
+            </div>
+        </div>
+
         <form>
             <div class="mb-3">
                 <h2 class="text-center" th:text="${medico.id} != null ? 'Editar Médico' : 'Cadastrar Médico'"></h2>
