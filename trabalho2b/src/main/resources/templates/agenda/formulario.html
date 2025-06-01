@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${agenda.id} != null ? 'Editar Agendamento' : 'Cadastrar Agendamento'">Agendamento</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</head>
+
+<body class="bg-light-subtle">
+<div th:insert="~{index :: header}"></div>
+<div class="d-flex justify-content-center">
+
+    <div class="border border-dark-subtle p-3 mt-5 w-50 rounded">
+        <form method="post">
+            <div class="mb-3">
+                <h2 class="text-center" th:text="${agenda.id} != null ? 'Editar Agendamento' : 'Cadastrar Agendamento'">Agendamento</h2>
+                <br>
+                <input hidden="true" name="id" th:value="${agenda.id}" type="text">
+
+                <div class="form-floating mb-3">
+                    <select class="form-select border-0 border-bottom shadow-sm" id="paciente" name="pacienteId" required>
+                        <option value="">Selecione o paciente</option>
+                        <option th:each="paciente : ${pacientes}"
+                                th:value="${paciente.id}"
+                                th:text="${paciente.nome}"
+                                th:selected="${agenda.paciente != null && agenda.paciente.id == paciente.id}">
+                            Nome do Paciente
+                        </option>
+                    </select>
+                    <label for="paciente">Paciente</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <select class="form-select border-0 border-bottom shadow-sm" id="medico" name="medicoId" required>
+                        <option value="">Selecione o médico</option>
+                        <option th:each="medico : ${medicos}"
+                                th:value="${medico.id}"
+                                th:text="${medico.nome}"
+                                th:selected="${agenda.medico != null && agenda.medico.id == medico.id}">
+                            Nome do Médico
+                        </option>
+                    </select>
+                    <label for="medico">Médico</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input class="form-control border-0 border-bottom shadow-sm" id="data" name="data"
+                           th:value="${agenda.data}" type="date" placeholder="Data" required>
+                    <label for="data">Data</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input class="form-control border-0 border-bottom shadow-sm" id="horario" name="horario"
+                           th:value="${agenda.horario}" type="time" placeholder="Horário" required>
+                    <label for="horario">Horário</label>
+                </div>
+
+                <div class="d-flex justify-content-center gap-2 mt-4">
+                    <a class="btn btn-outline-primary w-25" th:href="@{/agenda/listar}">Cancelar</a>
+                    <button class="btn btn-outline-secondary w-25" formmethod="post" th:formaction="@{/agenda/salvar}" type="submit">Salvar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
