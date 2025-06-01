@@ -9,35 +9,48 @@
 
 </head>
 
-<body>
+<body class="bg-light-subtle">
 <div th:insert="~{index :: header}"></div>
-<div class="container">
+<div class="d-flex justify-content-center">
 
     <div th:if="${erro}" class="alert alert-danger" role="alert">
         <p th:text="${erro}"></p>
     </div>
 
-    <form>
-        <div class="mb-3">
-            <input hidden="true" name="id" th:value="${paciente.id}" type="text">
+    <div class="border border-dark-subtle p-3 mt-5 w-50 p-3 rounded">
+        <form>
+            <div class="mb-3">
+                <h2 class="text-center" th:text="${paciente.id} != null ? 'Editar Paciente' : 'Cadastrar Paciente'"></h2>
+                <br>
+                <input hidden="true" name="id" th:value="${paciente.id}" type="text">
 
-            <label class="form-label" for="nome">Nome</label>
-            <input class="form-control" id="nome" name="nome" th:value="${paciente.nome}" type="text">
+                <div class="form-floating mb-3">
+                    <input class="form-control border-0 border-bottom shadow-sm" id="floatingInput" placeholder="Nome" name="nome" th:value="${paciente.nome}" type="text">
+                    <label class="form-label" for="floatingInput">Nome</label>
+                </div>
 
-            <label class="form-label" for="cpf">CPF</label>
-            <input class="form-control" id="cpf" name="cpf" th:value="${paciente.cpf}" type="text">
+                <div class="row g-2">
+                    <div class="form-floating mb-3 col-md">
+                        <input class="form-control border-0 border-bottom shadow-sm" placeholder="CPF" name="cpf" th:value="${paciente.cpf}" type="text">
+                        <label class="form-label" for="floatingInput">CPF</label>
+                    </div>
 
-            <label class="form-label" for="dataNascimento">Data Nascimento</label>
-            <input class="form-control" id="dataNascimento" name="dataNascimento" th:value="${paciente.dataNascimento}" type="date">
+                    <div class="form-floating mb-3 col-md">
+                        <input class="form-control border-0 border-bottom shadow-sm" id="telefone" placeholder="Numero de Telefone" name="telefone" th:value="${paciente.telefone}" type="text">
+                        <label class="form-label" for="floatingInput">Telefone</label>
+                    </div>
+                </div>
 
-            <label class="form-label" for="telefone">Telefone</label>
-            <input class="form-control" id="telefone" name="telefone" th:value="${paciente.telefone}" type="text">
+                <div class="form-floating mb-3">
+                    <input class="form-control border-0 border-bottom shadow-sm" id="dataNascimento" placeholder="Data de Nascimento" name="dataNascimento" th:value="${paciente.dataNascimento}" type="date">
+                    <label class="form-label" for="floatingInput">Data Nascimento</label>
+                </div>
 
+                <button class="btn btn-outline-secondary w-25 p-1" formmethod="post" th:formaction="@{/paciente/salvar}" type="submit">Salvar</button>
+            </div>
+        </form>
 
-            <br>
-            <button class="btn btn-dark" formmethod="post" th:formaction="@{/paciente/salvar}" type="submit">Salvar</button>
-        </div>
-    </form>
+    </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
